@@ -8,6 +8,13 @@ const json = (data) => data.json();
 
 const baseURL = 'http://www.pathofexile.com/api/public-stash-tabs';
 
+/* console exploring
+let result = null;
+tabs = fetch('http://www.pathofexile.com/api/public-stash-tabs')
+	.then(d => d.json())
+	.then(d => result = d.stashes)
+*/
+
 function fetchTabs(_nextChangeId) {
 	const url = _nextChangeId ? `?id=${baseURL}` : baseURL;
 	const errorDescr = `error fetching tabs${_nextChangeId ? ` with next_change_id: ${_nextChangeId}` : '.'}`
@@ -31,7 +38,8 @@ function getNextChangeId(resp) {
 // we'll use this during development to make sure we aren't
 // unaware of any properties of the API response
 function checkShape(data) {
-	// 
+	// R.differenceWith(comparator, expectedShape, data);
+	// Recursively R.omit(Object.keys(expectedShape), data);
 }
 
 let nextChangeId = fetchInitialTabs().then(getNextChangeId)
